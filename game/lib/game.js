@@ -8,12 +8,13 @@ function Game(canvasId) {
   this.background.yPosition = 0;
   this.background.onload = (function() {
     this.background.isReady = true;
-  });
+  }).bind(this);
+  this.dot = new Dot("canvas", this);
 }
 
-Game.prototype.clearBackground = function() {
+/*Game.prototype.clearBackground = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-};
+};*/
 
 Game.prototype.drawBackground = function() {
   //this.clearBackground();
@@ -25,8 +26,4 @@ Game.prototype.drawBackground = function() {
     this.background.yPosition = 0;
     this.ctx.drawImage(this.background, 0, this.background.yPosition, this.background.width, this.background.height);
   }
-};
-
-Game.prototype.draw = function () {
-  this.drawBackground();
 };
