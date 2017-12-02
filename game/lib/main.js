@@ -8,22 +8,25 @@ window.onload = function() {
   document.onkeydown = function(event) {
       switch (event.keyCode) {
         case 38:
-            game.dot.moveUp();
+          game.dot.state = "up";
+          game.moveSlow();
           break;
         case 40:
-            game.dot.moveDown();
+            game.dot.state = "down";
+            game.moveQuick();
           break;
         case 37:
-           game.dot.moveLeft();
+           game.dot.state = "left";
           break;
         case 39:
-           game.dot.moveRight();
+           game.dot.state = "right";
           break;
+        case 17:
+            game.dot.state = "stop";
+            break;
         default:
       }
     };
-
-
 
   function startGame() {
     setInterval(function() {

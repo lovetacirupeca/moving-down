@@ -8,16 +8,53 @@ function Dot(canvasId, game) {
   this.img.onload = (function() {
     this.img.isReady = true;
   }).bind(this);
-  this.x = 140;
+  this.x = 140; //canvas.width/2
   this.y = 70;
+  this.width = 20;
+  this.height = 20;
+  this.sate = "stop"; // up, down, right, left, stop
+
   this.KEY_UP = 38;
   this.KEY_DOWN = 40;
   this.KEY_LEFT = 37;
   this.KEY_RIGHT = 39;
+  this.KEY_CTRL = 17;
 }
 
 Dot.prototype.draw = function() {
-  this.ctx.drawImage(this.img, this.x, this.y, 20, 20);
+  this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+
+  switch (this.state) {
+    case "stop":
+      this.moveStop();
+      break;
+    case "down":
+      this.moveDown();
+      break;
+    case "up":
+      this.moveUp();
+      break;
+    case "right":
+      this.moveRight();
+      break;
+    case "left":
+      this.moveLeft();
+      break;
+  }
+
+  if ((this.y + this.height) >= this.canvas.height) {
+    this.state = 'up'
+  }
+  if ((this.y + this.height/4) <= 0) {
+    this.state = 'down'
+  }
+  if ((this.x + this.width) >= this.canvas.width) {
+    this.state = 'left'
+  }
+  if ((this.x + this.width/4) <= 0) {
+    this.state = 'right'
+  }
+
 };
 
 Dot.prototype.update = function() {
@@ -25,17 +62,22 @@ Dot.prototype.update = function() {
 };
 
 Dot.prototype.moveUp = function(){
-  this.y -= 1;
+  this.y -= 5;
 };
 
 Dot.prototype.moveRight = function(){
-  this.x += 1;
+  this.x += 5;
 };
 
 Dot.prototype.moveDown = function(){
-  this.y += 1;
+  this.y += 5;
 };
 
 Dot.prototype.moveLeft = function(){
-  this.x -= 1;
+  this.x -= 5;
+};
+
+Dot.prototype.moveStop = function(){
+  this.x = this.x;
+  this.y = this.y;
 };

@@ -10,6 +10,8 @@ function Game(canvasId) {
     this.background.isReady = true;
   }).bind(this);
   this.dot = new Dot("canvas", this);
+  this.KEY_UP = 38;
+  this.KEY_DOWN = 40;
 }
 
 /*Game.prototype.clearBackground = function() {
@@ -27,3 +29,11 @@ Game.prototype.drawBackground = function() {
     this.ctx.drawImage(this.background, 0, this.background.yPosition, this.background.width, this.background.height);
   }
 };
+
+Game.prototype.moveQuick = function() {
+  this.background.yPosition -= 20;
+}
+
+Game.prototype.moveSlow = function() {
+  this.background.yPosition += 2;
+}
