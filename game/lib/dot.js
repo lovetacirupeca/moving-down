@@ -1,6 +1,6 @@
-function Dot(canvasId, game) {
-  this.canvas = document.getElementById(canvasId);
-  this.ctx = this.canvas.getContext('2d');
+function Dot() {
+  this.canvas = canvas;
+  this.ctx = ctx;
   this.img = new Image();
   this.img.src = './img/player1.png';
   this.speed = 0.5;
@@ -13,6 +13,8 @@ function Dot(canvasId, game) {
   this.width = 20;
   this.height = 20;
   this.sate = "stop"; // up, down, right, left, stop
+
+  this.isFalling = false;
 
   this.KEY_UP = 38;
   this.KEY_DOWN = 40;
@@ -81,3 +83,28 @@ Dot.prototype.moveStop = function(){
   this.x = this.x;
   this.y = this.y;
 };
+
+Dot.prototype.collide = function(elements) {
+  collitions = elements.filter((function(e) {
+    return e.collide(this);
+  }).bind(this));
+
+  if (collitions.length > 0) {
+    return true;
+  }
+  return false;
+}
+
+/*
+///
+Dot.prototype.collide = function(elements) {
+  collitions = elements.filter((function(e) {
+    return e.collide(this);
+  }).bind(this));
+
+  if (collitions.length > 0) {
+    return true;
+  }
+  return false;
+};
+*/

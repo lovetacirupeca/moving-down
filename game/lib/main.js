@@ -4,34 +4,55 @@ window.onload = function() {
   };
 
   var game = new Game("canvas");
+  var dot = new Dot("canvas");
+  var obstacle = new Obstacle("canvas");
+  var timeCreateNewObstacle = 2.5 * 1000;
 
   document.onkeydown = function(event) {
       switch (event.keyCode) {
         case 38:
-          game.dot.state = "up";
+          dot.state = "up";
           game.moveSlow();
           break;
         case 40:
-            game.dot.state = "down";
+            dot.state = "down";
             game.moveQuick();
           break;
         case 37:
-           game.dot.state = "left";
+           dot.state = "left";
           break;
         case 39:
-           game.dot.state = "right";
+           dot.state = "right";
           break;
         case 17:
-            game.dot.state = "stop";
+            dot.state = "stop";
             break;
         default:
       }
     };
 
   function startGame() {
-    setInterval(function() {
+    var obstacleIntervalId = setInterval(function() {
+      //console.log('Entro en el intervalo y añado un nuevo objeto');
+      game.addNewObstacle();
+    }, 2000);
+
+    var drawIntervalId = setInterval(function() {
       game.drawBackground();
-      game.dot.update();
-    }, 1000/60);
+      dot.update();
+
+      if (game.dotCollision(dot)) {
+        clearInterval(drawIntervalId);
+        clearInterval(drawIntervalId);
+      }
+      // checkObstacleLength();
+    }, sec/fps);
   }
+
+  // function checkObstacleLength() {
+  //   if (game.obstacleList.length > 5 ) {
+  //     return timeCreateNewObstacle = 500;
+  //   }
+  // }
+
 };
