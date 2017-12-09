@@ -6,7 +6,6 @@ window.onload = function() {
   var game = new Game("canvas");
   var dot = new Dot("canvas");
   var obstacle = new Obstacle("canvas");
-  var timeCreateNewObstacle = 2.5 * 1000;
 
   document.onkeydown = function(event) {
       switch (event.keyCode) {
@@ -32,27 +31,32 @@ window.onload = function() {
     };
 
   function startGame() {
-    var obstacleIntervalId = setInterval(function() {
+    var timeCreateNewObstacle = 2.5 * 1000;
+
+    function obstacleIntervalId() {
       //console.log('Entro en el intervalo y añado un nuevo objeto');
       game.addNewObstacle();
-    }, 2000);
-
+      if(game.checkObstacleLength() === true) {
+        changeTimer();
+      }
+    };
+    function changeTimer() {
+      timeCreateNewObstacle = 500;
+      clearInterval(createObstacles);
+      setInterval(obstacleIntervalId, timeCreateNewObstacle)
+    }
+    var createObstacles = setInterval(obstacleIntervalId, timeCreateNewObstacle)
     var drawIntervalId = setInterval(function() {
       game.drawBackground();
       dot.update();
+      game.drawScore();
 
-      if (game.dotCollision(dot)) {
+      if (dot.collide(game.obstacleList)) {
         clearInterval(drawIntervalId);
         clearInterval(drawIntervalId);
       }
-      // checkObstacleLength();
+
     }, sec/fps);
   }
-
-  // function checkObstacleLength() {
-  //   if (game.obstacleList.length > 5 ) {
-  //     return timeCreateNewObstacle = 500;
-  //   }
-  // }
 
 };

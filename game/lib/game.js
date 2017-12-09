@@ -13,6 +13,10 @@ function Game() {
   this.KEY_UP = 38;
   this.KEY_DOWN = 40;
   this.obstacleList = [];
+  this.seconds = 0;
+  this.multiplier = 0.01;
+  this.score = Math.floor(this.seconds * this.multiplier)
+
 }
 
 /*Game.prototype.clearBackground = function() {
@@ -31,7 +35,7 @@ Game.prototype.drawBackground = function() {
   }
 
   this.updateObstacles();
-
+  this.seconds += 1;
 };
 
 Game.prototype.moveQuick = function() {
@@ -43,7 +47,7 @@ Game.prototype.moveSlow = function() {
 }
 
 Game.prototype.addNewObstacle = function() {
-  var obstacle = new Obstacle(50, this.canvas.height);
+  var obstacle = new Obstacle(this.width, this.canvas.height);
   this.obstacleList.push(obstacle);
 }
 
@@ -58,4 +62,16 @@ Game.prototype.dotCollision = function (dot) {
   return dot.collide(this.obstacleList);
 }
 
-///
+Game.prototype.drawScore = function(){
+  ctx.font = "12px serif";
+  ctx.fillStyle = '#3A749B';
+  ctx.fillText('SCORE: '+ Math.floor(this.seconds * this.multiplier), 20, 20);
+  //ctx.textBaseline = "top";
+};
+
+Game.prototype.checkObstacleLength = function() {
+  if (this.obstacleList.length === 5 ) {
+    console.log('Mas de 5 obstaculos');
+    return true;
+  }
+}

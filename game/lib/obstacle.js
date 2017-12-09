@@ -5,7 +5,7 @@ function Obstacle(width, y) {
 	this.y = y;
 	// this.vy = vy;
   this.height = 5;
-	this.width = width;
+	this.width = this.randomWidth();
 	// this.color = red;
 }
 
@@ -19,15 +19,20 @@ Obstacle.prototype.draw = function () {
 };
 
 Obstacle.prototype.randomX = function() {
-  var random = Math.floor(Math.random() * 300);
-  return random;
+  var randomX = Math.floor(Math.random() * 300);
+  return randomX;
+}
+
+Obstacle.prototype.randomWidth = function() {
+  var randomWidth = Math.floor(Math.random() * (200 - 20)) + 20;
+  return randomWidth;
 }
 
 ///
 
 Obstacle.prototype.collide = function(element) {
   return !(this.x + this.width < element.x ||
-    element.x + element.width < this.x ||
+    (element.x - 2) + element.width < this.x ||
     this.y + this.height < element.y ||
-    element.y + element.height < this.y);
+    (element.y - 2) + element.height < this.y);
 }
