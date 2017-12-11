@@ -93,18 +93,4 @@ Dot.prototype.collide = function(elements) {
     return true;
   }
   return false;
-}
-
-/*
-///
-Dot.prototype.collide = function(elements) {
-  collitions = elements.filter((function(e) {
-    return e.collide(this);
-  }).bind(this));
-
-  if (collitions.length > 0) {
-    return true;
-  }
-  return false;
 };
-*/

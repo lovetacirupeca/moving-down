@@ -11,7 +11,8 @@ function Obstacle(width, y) {
 
 Obstacle.prototype.draw = function () {
   this.ctx.save();
-  this.ctx.fillStyle = "#9B7E9B";
+  this.ctx.fillStyle = "#FFF";
+  this.ctx.strokeStyle = "#000";
 	this.ctx.fillRect(this.x, this.y, this.width, this.height);
   // this.x -= 5;
   this.y -= obstacleSpeed;

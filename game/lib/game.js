@@ -13,9 +13,10 @@ function Game() {
   this.KEY_UP = 38;
   this.KEY_DOWN = 40;
   this.obstacleList = [];
+  this.rewardList = [];
   this.seconds = 0;
   this.multiplier = 0.01;
-  this.score = Math.floor(this.seconds * this.multiplier)
+  this.score = Math.floor(this.seconds * this.multiplier);
 
 }
 
@@ -38,13 +39,15 @@ Game.prototype.drawBackground = function() {
   this.seconds += 1;
 };
 
+/*
 Game.prototype.moveQuick = function() {
-  this.background.yPosition -= 20;
+  this.background.yPosition -= 2;
 }
 
 Game.prototype.moveSlow = function() {
   this.background.yPosition += 2;
 }
+*/
 
 Game.prototype.addNewObstacle = function() {
   var obstacle = new Obstacle(this.width, this.canvas.height);
@@ -70,8 +73,8 @@ Game.prototype.drawScore = function(){
 };
 
 Game.prototype.checkObstacleLength = function() {
-  if (this.obstacleList.length === 5 ) {
-    console.log('Mas de 5 obstaculos');
+  if (this.obstacleList.length === 20 ) {
+    console.log('Mas de 20 obstaculos');
     return true;
   }
 }

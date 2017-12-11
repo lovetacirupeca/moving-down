@@ -11,11 +11,11 @@ window.onload = function() {
       switch (event.keyCode) {
         case 38:
           dot.state = "up";
-          game.moveSlow();
+          //game.moveSlow();
           break;
         case 40:
             dot.state = "down";
-            game.moveQuick();
+            //game.moveQuick();
           break;
         case 37:
            dot.state = "left";
@@ -31,7 +31,7 @@ window.onload = function() {
     };
 
   function startGame() {
-    var timeCreateNewObstacle = 2.5 * 1000;
+    var timeCreateNewObstacle = 2 * 1000;
 
     function obstacleIntervalId() {
       //console.log('Entro en el intervalo y añado un nuevo objeto');
@@ -41,7 +41,7 @@ window.onload = function() {
       }
     };
     function changeTimer() {
-      timeCreateNewObstacle = 500;
+      timeCreateNewObstacle = 1.5 * 1000;
       clearInterval(createObstacles);
       setInterval(obstacleIntervalId, timeCreateNewObstacle)
     }
